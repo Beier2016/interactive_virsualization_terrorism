@@ -3,6 +3,8 @@ Dara source: http://start.umd.edu/gtd/contact/ (The Global Terrorism Database (G
 
 Interactive Page: https://bson0001.shinyapps.io/Terrorism_June_4/ 
 
+Keywords: interactive visualization, stroy-telling, text mining, terrorism
+
 ## Introduction
 The main message I would like to convey is anti-terrorism by telling a story of a city called 'Baghdad' in Iraq. Terrorism has taken 0.17 million people’s lives, destroyed a hundred cities, made countless family broken within a decade. Especially, recent years, terrorist attacks happened around the world, the news and reports on the television and internet overwhelm us. Some people go off the track to join terrorist organizations, some governments furtively support terrorist organizations by funds or weapons because of some political purposes, and the public is not clear about the danger of terrorism. Therefore, the intended audience is the politician and the public. Besides, the information on the number of killed and wounded, location information, the terrorist organization, attack number, attack type, attack weapon, and text will be included in the shiny application.
 
