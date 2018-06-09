@@ -1,0 +1,178 @@
+---
+title: "Global Terrorism"
+author: "Beier Song"
+date: "June 4, 2018"
+output: 
+  prettydoc::html_pretty:
+    theme: hpstr
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE, message=FALSE}
+#loading data, function
+source("displayPre.R")
+```
+
+```{r, echo=FALSE}
+#first picture
+fluidPage(
+  div(img(src = "terrorrPic.png"), style="text-align: center;"),
+  hr()
+)
+```
+
+```{r, echo=FALSE}
+#paragraph
+fluidPage(
+  h2("You must not unfamiliar with the word 'Terrorism',  because that word appears in the news almost every day. However, do you really know that word? what can it bring? "),
+  h2("170, 210 people were killed,  293, 436 people were wound by  84, 089 terrorist attacks between 2006 and 2016.")
+)
+```
+
+```{r eruptions, echo=FALSE}
+#tree map
+sidebarLayout(
+  sidebarPanel(
+    h4("The treemap shows proportation according to the number of people killed."),
+    br(),
+    radioButtons("type", label = "Type:", choices = c("Region", "Country", "Year",
+                                                      "City"),selected = "Region",inline = FALSE),
+    br(), 
+    h4("Which city, year, country and region is the most dangerous ?"), 
+    br(), 
+    h4("Put your mouse on the treemap to find out !")),
+  mainPanel(
+    highchartOutput("treemap", width = 530, height = 600)
+  )
+)
+output$treemap <- renderHighchart({g_treemap(input$type)})
+```
+
+```{r, echo=FALSE}
+#Baghdad introduction
+fluidPage(
+  hr(),
+  div(img(src = "baghdad.png", width = 300, height = 300, align = "left"), h3("  Baghdad is the capital and largest city of Iraq, which is also the most dangerous city in the world.  Every day, there is 1.8 times attack happens (6, 546 times for 10 years), 4.8 people die (17, 661 people for 10 years) in attacks. It was beautiful, historic and prosperous, but now it was destroyed by groups of people with extremism and terrorism. Can you find it on the map?")),
+  hr()
+  
+)
+```
+
+```{r, echo=FALSE}
+#leaflet map
+sidebarLayout(
+  sidebarPanel(
+    h4("Every single marker is a single terrorist event!"),
+    sliderInput("year", "Year:",
+                min = 2006, max = 2016, value = c(2015,2016)),
+    radioButtons("succe", label = "Attack succeeded:", choices = c("Yes", "No"),selected = "Yes",inline = FALSE),
+    selectInput("city", label = "Top 30 dangerous City", choices = city_name_list, selected = "Baghdad"), 
+    h6("Sources: The Global Terrorism Database (GTD)")),
+  
+  mainPanel(
+    leafletOutput("map")
+  )
+)
+
+output$map <- renderLeaflet({
+  g_map_attack(input$year, input$succe, input$city)})
+```
+
+```{r, echo=FALSE}
+#paragraph
+fluidPage(
+  hr(),
+  h3("On 3 July 2016, Karrada bombing attack killed about 400 civilians and injure countless people by a suicide truck-bomb, which was produced by a one of notorious terrorist organizations - the Islamic State of Iraq and the Levant. "),
+  br(),
+  h3("Now, It is the time to know about them!"),
+  hr()
+)
+```
+
+```{r, echo=FALSE}
+#Data table for terrorist organizations
+fluidPage(
+  DTOutput("terror_g"),
+  h6("Sources: The Global Terrorism Database (GTD)"),
+  hr(),
+  h3("You may not be aware of what a terrorist organization can do. From the table, can you believe a single terrorist organization killed 21,605 people by 5,895 attacks within a decade?  "),
+  br(),
+  h3("The Paris Terror Attack in 2015,  many shootings in the USA. Therefore, the terrorist activities do not only happen in non-developed countries, they encircle us."),
+  hr()
+)
+
+output$terror_g <- renderDT(g_table_terrorGroup())
+```
+
+```{r, echo=FALSE}
+#Charts with tabs
+sidebarLayout(
+  sidebarPanel(
+    h4("It is the chance to know how they do that."),
+    selectInput("terror_name", "Terrorist Organization:", choices = top30_group, selected = "All"), 
+    h4("Do you feel the world get less safe especially recent years? Check the number! Can you see the trend?"),
+    br(),
+    h4("Can you find the information of organization who is responsible for Karrada bombing in Iraq?"),
+    br(),
+    h4("Bombing is the most frequent way to produce terrorist attacks.")),
+  mainPanel(
+    tabsetPanel(
+      tabPanel("Attack Number", highchartOutput("barchart", width = 500, height = 600)),
+      tabPanel("Attack Type", highchartOutput("piechart", width = 550, height = 600)),
+      tabPanel("Attack Weapon", highchartOutput("icon", width = 500, height = 600), h6("Sources: The Global Terrorism Database (GTD)")))
+  )
+)
+output$barchart <- renderHighchart({g_2Dbarchart_attack_number(input$terror_name)})
+output$piechart <- renderHighchart({g_piechart_attack_type(input$terror_name)})
+output$icon <- renderHighchart({g_iconvir_weapon(input$terror_name)})
+```
+
+```{r, echo=FALSE}
+#break
+fluidPage(
+  hr()
+)
+```
+
+```{r, echo=FALSE}
+#word cloud
+sidebarLayout(
+  mainPanel(
+    tabsetPanel(
+      tabPanel("Summary", plotOutput("summary", width = 570, height = 570), h6("Sources: The Global Terrorism Database (GTD)")),
+      tabPanel("Motive", plotOutput("motive", width = 570, height = 570), h6("Sources: The Global Terrorism Database (GTD)")),
+      tabPanel("Ransom", plotOutput("ransom", width = 570, height = 570), h6("Sources: The Global Terrorism Database (GTD)")))
+  ),
+  sidebarPanel(
+    h3("Secret with Words"), 
+    h4("Text mining grepped some keywords from attack summary, motivation, and ransom. "),
+    h4("responsibility ?"),
+    h4("group ?"),
+    h4("violence ?"),
+    h4("assailant ?"),
+    h4("Anything else ?"),
+    h2("LIVES and FAMILIES!")),
+  position = c("left", "right"),
+  fluid = TRUE
+)
+
+output$summary <- renderPlot({g_textAnalysis_summary()})
+output$motive <- renderPlot({g_textAnalysis_motive()})
+output$ransom <- renderPlot({g_textAnalysis_summary()})
+```
+
+```{r, echo=FALSE}
+#conclusion
+fluidPage(
+  hr(),
+  div(img(src = "anti_terror.png"), style="text-align: center;"),
+  h3("So far you must know how much damage they can produce to the individual, to the society, and to the world. Now, please say no to terrorism with me."),
+  br(),
+  #data source link
+  a(href = "http://start.umd.edu/gtd/contact/", "Data Source Link: GTD")
+)
+```
