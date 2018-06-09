@@ -15,10 +15,10 @@ There are two main files used for building the shiny application. The first one 
 
 ## Screenshots
 Screenshot1: 
-![alt text](https://github.com/Beier2016/interactive_virsualization_terrorism/blob/master/screenshots/1.png "Logo Title Text 1")
+![alt text](https://github.com/Beier2016/interactive_virsualization_terrorism/blob/master/screenshots/1.png "1")
 
 Screenshot2: 
-![alt text](https://github.com/Beier2016/interactive_virsualization_terrorism/blob/master/screenshots/2.png "Logo Title Text 1")
+![alt text](https://github.com/Beier2016/interactive_virsualization_terrorism/blob/master/screenshots/2.png "2")
 
 Screenshot3: 
-![alt text](https://github.com/Beier2016/interactive_virsualization_terrorism/blob/master/screenshots/3.png "Logo Title Text 1")
+![alt text](https://github.com/Beier2016/interactive_virsualization_terrorism/blob/master/screenshots/3.png "3")
