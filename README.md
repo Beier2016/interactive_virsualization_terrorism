@@ -10,3 +10,13 @@ The main message I would like to convey is anti-terrorism by telling a story of 
 I use Shiny with Rmarkdown in Rstudio to implement my design, because Shiny and Rmarkdown can work together to produce interactive web-based page.
 
 There are two main files used for building the shiny application. The first one “displayPre.R” contains all functions used to generate charts, map and word cloud and useful list for interactive visualization selection such as top 30 dangerous cities’ names. Another file is “Terrorism.Rmd” which is runnable to produce the web page.
+
+## Screenshots
+Screenshot1: 
+![alt text](https://github.com/Beier2016/interactive_virsualization_terrorism/blob/master/screenshots/1.png "Logo Title Text 1")
+
+Screenshot2: 
+![alt text](https://github.com/Beier2016/interactive_virsualization_terrorism/blob/master/screenshots/2.png "Logo Title Text 1")
+
+Screenshot3: 
+![alt text](https://github.com/Beier2016/interactive_virsualization_terrorism/blob/master/screenshots/3.png "Logo Title Text 1")
